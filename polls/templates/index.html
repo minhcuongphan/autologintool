@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form id="auto-login-form">
+    {% csrf_token %}
+    <div><a href="#" class="btn button-1" data-type="linkedIn">LinkedIn</a></div>
+    <div><a href="#" class="btn button-2" data-type="gmail">Gmail</a></div>
+    <div><a href="#" class="btn button-3" data-type="github">Github</a></div>
+    <div><a href="#" class="btn button-4" data-type="faceboom">Facebook</a></div>
+<form>
+{% endblock %}
+
+
+
+{% block js %}
+<script>
+    $("a.btn").click(function (e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        var dataType = $(this).data("type");
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'auto_login' %}",
+            data: {
+                'dataType': dataType,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        })
+    })
+</script>
+</script>
+{% endblock %}
