@@ -73,3 +73,9 @@ def gmailLogin(username, password):
         By.CSS_SELECTOR, '#passwordNext > div > button > span').click()
 
     time.sleep(1000)
+
+def facebookLogin(username, password):
+    return ''
+
+def githubLogin(username, password):
+    return ''
