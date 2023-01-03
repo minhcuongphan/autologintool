@@ -1,4 +1,4 @@
-import undetected_chromedriver as uc
+import undetected_chromedriver.v2 as uc
 import time
 from django.shortcuts import render
 from selenium import webdriver
@@ -6,24 +6,33 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
+
 
 def index(request):
     return render(request, "index.html")
 
 def autologin(request):
     dataType = request.POST.get("dataType", None)
-    match dataType:
-        case "gmail":
+    switch(dataType)
+
+
+def switch(dataType):
+        if dataType == "gmail":
             username = ""
             password = ""
             gmailLogin(username, password)
-        case "linkedIn":
+        elif dataType == "linkedIn":
             username = ""
             password = ""
             linkedInLogin(username, password)
-        case _:
-            print('autologin_default')
+        elif dataType == "facebook":
+            username = ""
+            password = ""
+            facebookLogin(username, password)
+        elif dataType == "github":
+            username = ""
+            password = ""
+            githubLogin(username, password)
     
 def linkedInLogin(username, password):
     chrome_options = Options()
